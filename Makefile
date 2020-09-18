@@ -33,6 +33,12 @@ update: ## Gets any module updates
 plan: init update ## Runs a plan. Note that in Terraform < 0.7.0 this can create state entries.
 	@terraform plan -input=false -refresh=true -var-file=projects/$(PROJECT)/inputs.tfvars
 
+plan-out: init update ## Runs a plan. Note that in Terraform < 0.7.0 this can create state entries.
+	@terraform plan -input=false -out=plan.hcl -refresh=true -var-file=projects/globals/inputs.tfvars -var-file=projects/$(PROJECT)/inputs.tfvars
+
+plan-show: plan-out
+	@terraform show -json plan.hcl | jq '.' > plan.json
+
 plan-destroy: init update ## Shows what a destroy would do.
 	@terraform plan -input=false -refresh=true -module-depth=-1 -destroy -var-file=projects/$(PROJECT)/inputs.tfvars
 
