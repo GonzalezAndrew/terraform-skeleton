@@ -1,13 +1,13 @@
 #------------------------------------------------------------------------------
-# Variables that need to be set
+# Required Variables
 #------------------------------------------------------------------------------
 variable "aws_region" {
-  description = "The AWS region to work in"
+  description = "The AWS region to deploy to (ex. us-east-2)"
   type        = string
-  default     = "us-east-1"
+  default     = "us-east-2"
 }
 
 variable "tf_project" {
-  description = "The name of the project folder that inputs.tfvars is in"
+  description = "The environment being invoked."
   type        = string
 }
