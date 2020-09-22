@@ -8,36 +8,27 @@ The Terraform project follows a simple directory structure:
     ├── LICENSE
     ├── Makefile
     ├── README.md
-    ├── backend.tf
     ├── main.tf
     ├── outputs.tf
     ├── projects
     │   ├── globals
     │   │   └── inputs.tfvars
-    │   ├── production
+    │   ├── aat-production
     │   │   └── inputs.tfvars
-    │   └── staging
+    │   └── aat-staging
     │       └── inputs.tfvars
-    ├── provider.tf
     ├── variables.tf
-    └── versions.tf
 
 ## Projects
 The `projects` directory stores the terraform tfvars file for several environments and constant variables that will be used accros the different environments. The directory `globals` directory is responsible for storing the constant variables while the directories, `staging` and `production`, are responsible for the variables which belong to the appropriate directory. 
 
 ## Terraform Files
-### [backend.tf](https://www.terraform.io/docs/backends/types/index.html)
-A backend in Terraform allows individuals to store the Terraform state to be stored in a shared location such as an S3 or GCS. The backend also establishes a locking around the state files to protect against corrupting the statefile. 
 ### main.tf
-Calls modules, locals, data sources and creates resources.
+Calls modules, locals, data sources and creates resources. The main file will also declare the Terraform version, configure the providers and [backend](https://www.terraform.io/docs/backends/types/index.html).
 ### variables.tf
 Contains all variables used in the main.tf or are initialized in the inputs.tf file in the project files.
 ### outputs.tf
 Contains outputs from the resources generated from the Terraform project and will be stored in the statefile.
-### provider.tf
-Specifies and configures which providers will be used by the Terraform project. 
-### versions.tf
-Specifies and configures which Terraform version will be used by the Terraform project.
 ## Makefile
 The Makefile is used to invoke Terraform locally. The Makefile requires the user to set several environmental variables and variables:
 ```
